@@ -117,6 +117,9 @@ var tictactoe = function(){
   if($(this).hasClass('clicked')){
     return false
   }
+
+  moves +=1
+
   if(player === 0){
     $(this).html('<img src="images/banana.png" id="banana">');
     player +=1;
@@ -140,6 +143,12 @@ var tictactoe = function(){
     }
       score();
   };
+
+  //if there is a tie
+  if(moves === 9  && !winnings(inputX) && !winnings(inputY)){
+  $('#winner').html('Noone wins')
+  }
+
 }
 
 //////////END OF TICTACTOE ////////////////////////////
