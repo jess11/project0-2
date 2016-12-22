@@ -1,46 +1,19 @@
+// $(document).ready(function(){
+
+//making the table- THIS MUST COME FIRST- put in prompt
 
 var tableSize = 0;
+
+
 var player = 0;
 var moves = 0;
 var inputX =[];
 var inputY = [];
 var scoreX = 0;
 var scoreY = 0;
-var interval;
-
-//Determine grid size and make table (between 3-10 col/rows)
-var gridSize = function(num){
-  if (num < 3 || num > 10){
-    return false;
-  }
-  var html='';
-  for( var i = 0; i<num ; i++ ){
-      html += "<tr>"
-    for (var j = 0; j<num ; j++ ){
-      html += "<td id='c" + i.toString() + j.toString() + "'></td>";
-    }
-    html+="</tr>"
-  }
-  $('table').html(html);
-  reset();
-  resetScore();
-  $('td').on('click', tictactoe);
-
-  //mouse hovering over tiles makes it blink
-  $('td').mouseenter(function(){
-    $(this).css("border-width");
-    $( this ).fadeOut( 200 );
-    $( this ).fadeIn( 100 );
-  });
-}
-
-//User inputs grid size via input field
-var whatSize= function (){
-  tableSize= parseInt($('input').val());
-  gridSize(tableSize);
-}
 
 //Find if there is a win
+
 winnings = function (input){
   //Horizontal wins
   for (var i = 0 ; i <tableSize ; i++ ){
@@ -110,7 +83,6 @@ var blockClicking = function (){
 
 //reset board (via button)
 var reset = function (){
-  clearInterval(interval);
   for (var i = 0; i<$('td').length; i++){
     $($('td')[i]).removeClass();
     $($('td')[i]).html('');
@@ -120,12 +92,13 @@ var reset = function (){
   inputX =[];
   inputY = [];
   $('#winner').html('')
+
 }
 
 //prints score to the screen
 var score = function(){
-  $('#scoreX').html(scoreX );
-  $('#scoreY').html(scoreY );
+  $('#scoreX').html('Monkey: ' + scoreX );
+  $('#scoreY').html('Unicorn: ' + scoreY );
 }
 
 //reset scores (via button)
@@ -135,6 +108,7 @@ var resetScore = function(){
   $('#winner').html('');
   score();
 }
+
 
 //////////START OF TICTACTOE ////////////////////////////
 
@@ -146,15 +120,45 @@ var tictactoe = function(){
 
   moves +=1
 
-  if(player === 0){
-    $(this).html('<img src="images/banana.png" id="banana">');
-    player +=1;
-    inputX.push($(this).attr('id'));
-  } else {
+
     $(this).html('<img src="images/unicorn.jpeg" id="unicorn">');
-    player -=1;
     inputY.push($(this).attr('id'));
-  }
+
+    if (moves === 2){
+      moves+=1;
+      var lastmove = inputY[0];
+      if (lastmove === "c00"){
+        $('#c02').html('<img src="images/banana.png" id="banana">')
+      }else {
+        $('#c00').html('<img src="images/banana.png" id="banana">');
+      }
+    }
+debugger;
+    if (moves === 4){
+        if(inputY[0].slice(1,2) === inputY[1].slice(1,2) ){
+          var idbanana = function(num){
+            return "#c" + inputY[0].slice(1,2) + num;
+          }
+
+          for (var i = 0; i<3 ; i++){
+            if ( $(idbanana(i)).hasClass('clicked') == false){
+              $(idbanana(i)).html('<img src="images/banana.png" id="banana">');
+            }
+          }
+        }
+    }
+
+
+
+
+
+
+
+
+    // $(this).html('<img src="images/unicorn.jpeg" id="unicorn">');
+    // player -=1;
+    // inputY.push($(this).attr('id'));
+
 
   $(this).addClass('clicked');
 
@@ -163,29 +167,54 @@ var tictactoe = function(){
     if ((player-1) === 0){
       scoreX += 1;
       $('#winner').html('Monkey wins!');
-      interval = setInterval(function(){
-        $('#winX').fadeOut(500);
-        $('#winX').fadeIn(500);
-      }, 1000);
     } else {
       scoreY += 1;
       $('#winner').html('Unicorn wins!');
-      interval = setInterval(function(){
-        $('#winY').fadeOut(500);
-        $('#winY').fadeIn(500);
-      }, 1000);
     }
       score();
   };
 
   //if there is a tie
-  if(moves === tableSize*tableSize  && !winnings(inputX) && !winnings(inputY)){
+  if(moves === 9  && !winnings(inputX) && !winnings(inputY)){
   $('#winner').html('Noone wins')
   }
 
 }
 
 //////////END OF TICTACTOE ////////////////////////////
+// });
+
+var gridSize = function(num){
+  if (num < 3 || num > 20){
+    return false;
+  }
+  var html='';
+
+  for( var i = 0; i<num ; i++ ){
+      html += "<tr>"
+    for (var j = 0; j<num ; j++ ){
+      html += "<td id='c" + i.toString() + j.toString() + "'></td>";
+    }
+    html+="</tr>"
+  }
+  $('table').html(html);
+
+  reset();
+  resetScore();
+  $('td').on('click', tictactoe);
+
+  $('#c11').html('<img src="images/banana.png" id="banana">');
+  player +=1;
+  inputX.push($('#c11').attr('id'));
+  moves +=1
+}
+
+var whatSize= function (){
+  tableSize= parseInt($('input').val());
+  gridSize(tableSize);
+}
+
+/////////////////////
 
 $('#enterSize').on('click', whatSize);
 $('.reset').on('click',reset);

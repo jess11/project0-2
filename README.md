@@ -8,7 +8,7 @@ Play noughts and crosses but as a monkey and a unicorn!! ^_^ ~~
 
 ## HOW TO PLAY
 
-- Choose the board size first by inputting a number between 3-20 and press the OK button.
+- Choose the board size first by inputting a number between 3-10 and press the OK button.
 - Two player game. Players choose either to be a monkey or a unicorn. The monkey starts first.
 - Click on the grid and put your marker down where you want.
 - Players alternate in turns.

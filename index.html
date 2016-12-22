@@ -5,31 +5,33 @@
   <meta charset="UTF-8">
   <link href="https://fonts.googleapis.com/css?family=Lobster|Shadows+Into+Light" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/style.css">
-
   <title>Monkeys & Unicorns</title>
 </head>
 <body>
-
   <h1>Monkeys & Unicorns</h1>
+  <div id="container">
+
+    <div class="buttons">
+      <button class="reset">Play Again</button>
+      <button class="resetScore">Reset Scores</button>
+    </div>
+
     <div id="scores">
       <img id="winX" src="images/banana-win.gif">
-      <h2 id="scoreX">Monkey: 0</h2>
+      <h2 id="scoreX">0</h2>
       <img id= "winY" src="images/unicorn-win.gif">
-      <h2 id="scoreY">Unicorn: 0</h2>
+      <h2 id="scoreY">0</h2>
     </div>
-  <div id="container">
-      <div id="size">
-        <input placeholder="Input board size (3-20)"></input>
-        <button id="enterSize"> OK </button>
-      </div>
-
-      <table>
-      </table>
-      <div class="buttons">
-        <button class="reset">Play Again</button>
-        <button class="resetScore">Reset Scores</button>
-      </div>
     <div id="winner"></div>
+
+    <table>
+    </table>
+
+    <div id="size">
+      <input placeholder="Input board size (3-10)"></input>
+      <button id="enterSize"> OK </button>
+    </div>
+
   </div>
 
 <script  src="js/jquery-1.12.4.js"></script>
