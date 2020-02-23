@@ -28,6 +28,6 @@ Play noughts and crosses but as a monkey and a unicorn!! ^_^ ~~
 
 ## CONTACT
 
-Jess: kryx11@gmail.com
+Jess: jtran040@gmail.com
 
 [Link to game](https://jess11.github.io/project0-2)
